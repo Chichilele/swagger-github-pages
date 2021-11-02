@@ -1,0 +1,10 @@
+components:
+  parameters:
+    role_id:
+      name: role_id
+      description: Role's id
+      in: path
+      required: true
+      schema:
+        format: int64
+        type: integer

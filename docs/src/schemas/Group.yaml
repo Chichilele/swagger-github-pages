@@ -1,0 +1,24 @@
+components:
+  schemas:
+    Group:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+    Group_details:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+    Groups:
+      items:
+        $ref: "#/components/schemas/Group_details"
+      type: array

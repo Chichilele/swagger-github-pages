@@ -1,0 +1,80 @@
+paths:
+  /users:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/User.yaml#/components/schemas/Users"
+          description: Returns list of Users
+      summary: Get registered Users
+      tags:
+        - users
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/User.yaml#/components/schemas/User"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/User.yaml#/components/schemas/User_details"
+          description: Returns created User
+        "400":
+          description: Invalid payload
+        "409":
+          description: Conflict, username or email already exist
+      summary: Create a new User
+      tags:
+        - users
+  /users/{user_id}:
+    delete:
+      responses:
+        "200":
+          description: Delete a User
+        "404":
+          description: User does not exist
+      summary: Delete User
+      tags:
+        - users
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/User.yaml#/components/schemas/User_details"
+          description: Returns requested Users
+        "404":
+          description: User does not exist
+      summary: Get registered Users
+      tags:
+        - users
+    parameters:
+      - $ref: "../parameters/user_id.yaml#/components/parameters/user_id"
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/User.yaml#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/User.yaml#/components/schemas/User_details"
+          description: Returns User with updated fields
+        "400":
+          description: Invalid payload
+        "404":
+          description: User does not exist
+      summary: Update User's fields
+      tags:
+        - users
