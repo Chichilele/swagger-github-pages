@@ -1,0 +1,368 @@
+openapi: 3.0.3
+info:
+  description: Swagger spec for documenting Intellium-AI boilerplate API
+  title: Intellium-AI boilerplate API
+  version: 0.0.1
+servers:
+  - url: 'http://localhost/api'
+paths:
+  /groups:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1groups/post/responses/201/content/application~1json/schema'
+                type: array
+          description: Returns list of Groups
+      summary: Get registered Groups
+      tags:
+        - groups
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                description:
+                  type: string
+                name:
+                  type: string
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                properties:
+                  created_at:
+                    format: date-time
+                    type: string
+                  description:
+                    type: string
+                  name:
+                    type: string
+                  updated_at:
+                    format: date-time
+                    type: string
+          description: Returns created Group
+        '400':
+          description: Invalid payload
+      summary: Create a new Group
+      tags:
+        - groups
+  '/groups/{group_id}':
+    delete:
+      responses:
+        '200':
+          description: Delete a Group
+        '404':
+          description: Group does not exist
+      summary: Delete Group
+      tags:
+        - groups
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1groups/post/responses/201/content/application~1json/schema'
+          description: Returns requested Group.
+        '404':
+          description: Group does not exist
+      summary: Get registered groups
+      tags:
+        - groups
+    parameters:
+      - name: group_id
+        description: Group's id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1groups/post/requestBody/content/application~1json/schema'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1groups/post/responses/201/content/application~1json/schema'
+          description: Return Group with updated fields
+        '400':
+          description: Invalid payload
+        '404':
+          description: Group does not exist
+      summary: Update Group's fields
+      tags:
+        - groups
+  /roles:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1roles/post/responses/201/content/application~1json/schema'
+                type: array
+          description: Returns list of Roles
+      summary: Get registered Roles
+      tags:
+        - roles
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                description:
+                  type: string
+                group:
+                  type: string
+                name:
+                  type: string
+                permissions:
+                  items:
+                    type: string
+                  type: array
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                properties:
+                  created_at:
+                    format: date-time
+                    type: string
+                  description:
+                    type: string
+                  group:
+                    type: string
+                  name:
+                    type: string
+                  permissions:
+                    items:
+                      type: string
+                    type: array
+                  updated_at:
+                    format: date-time
+                    type: string
+          description: Returns created Role
+        '400':
+          description: Invalid payload
+      summary: Create a new Role
+      tags:
+        - roles
+  '/roles/{role_id}':
+    delete:
+      responses:
+        '200':
+          description: Delete a Role
+        '404':
+          description: Role does not exist
+      summary: Delete Role
+      tags:
+        - roles
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1roles/post/responses/201/content/application~1json/schema'
+          description: Returns requested Roles
+        '404':
+          description: Role does not exist
+      summary: Get registered roles
+      tags:
+        - roles
+    parameters:
+      - name: role_id
+        description: Role's id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1roles/post/requestBody/content/application~1json/schema'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1roles/post/responses/201/content/application~1json/schema'
+          description: Returns Role with updated fields
+        '400':
+          description: Invalid payload
+        '404':
+          description: Role does not exist
+      summary: Update Role's fields
+      tags:
+        - roles
+  /users:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1users/post/responses/201/content/application~1json/schema'
+                type: array
+          description: Returns list of Users
+      summary: Get registered Users
+      tags:
+        - users
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  format: email
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                username:
+                  type: string
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                properties:
+                  activated:
+                    type: boolean
+                  confirmed_at:
+                    format: date-time
+                    type: string
+                  created_at:
+                    format: date-time
+                    type: string
+                  email:
+                    format: email
+                    type: string
+                  first_name:
+                    type: string
+                  id:
+                    type: integer
+                  last_name:
+                    type: string
+                  updated_at:
+                    format: date-time
+                    type: string
+                  username:
+                    type: string
+          description: Returns created User
+        '400':
+          description: Invalid payload
+        '409':
+          description: 'Conflict, username or email already exist'
+      summary: Create a new User
+      tags:
+        - users
+  '/users/{user_id}':
+    delete:
+      responses:
+        '200':
+          description: Delete a User
+        '404':
+          description: User does not exist
+      summary: Delete User
+      tags:
+        - users
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users/post/responses/201/content/application~1json/schema'
+          description: Returns requested Users
+        '404':
+          description: User does not exist
+      summary: Get registered Users
+      tags:
+        - users
+    parameters:
+      - name: user_id
+        description: User's id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1users/post/requestBody/content/application~1json/schema'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users/post/responses/201/content/application~1json/schema'
+          description: Returns User with updated fields
+        '400':
+          description: Invalid payload
+        '404':
+          description: User does not exist
+      summary: Update User's fields
+      tags:
+        - users
+  '/users/{user_id}/activate':
+    parameters:
+      - $ref: '#/paths/~1users~1%7Buser_id%7D/parameters/0'
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users/post/responses/201/content/application~1json/schema'
+          description: Returns ativated User
+        '400':
+          description: Invalid payload
+      summary: Activate a User
+      tags:
+        - users
+  '/users/{user_id}/deactivate':
+    parameters:
+      - $ref: '#/paths/~1users~1%7Buser_id%7D/parameters/0'
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users/post/responses/201/content/application~1json/schema'
+          description: Returns deativated User
+        '400':
+          description: Invalid payload
+      summary: Dectivate a User
+      tags:
+        - users
