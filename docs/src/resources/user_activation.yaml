@@ -1,0 +1,33 @@
+paths:
+  /users/{user_id}/activate:
+    parameters:
+      - $ref: "../parameters/user_id.yaml#/components/parameters/user_id"
+    post:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/User.yaml#/components/schemas/User_details"
+          description: Returns ativated User
+        "400":
+          description: Invalid payload
+      summary: Activate a User
+      tags:
+        - users
+  /users/{user_id}/deactivate:
+    parameters:
+      - $ref: "../parameters/user_id.yaml#/components/parameters/user_id"
+    post:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/User.yaml#/components/schemas/User_details"
+          description: Returns deativated User
+        "400":
+          description: Invalid payload
+      summary: Dectivate a User
+      tags:
+        - users

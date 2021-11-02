@@ -1,0 +1,78 @@
+paths:
+  /roles:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Role.yaml#/components/schemas/Roles"
+          description: Returns list of Roles
+      summary: Get registered Roles
+      tags:
+        - roles
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/Role.yaml#/components/schemas/Role"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Role.yaml#/components/schemas/Role_details"
+          description: Returns created Role
+        "400":
+          description: Invalid payload
+      summary: Create a new Role
+      tags:
+        - roles
+  /roles/{role_id}:
+    delete:
+      responses:
+        "200":
+          description: Delete a Role
+        "404":
+          description: Role does not exist
+      summary: Delete Role
+      tags:
+        - roles
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Role.yaml#/components/schemas/Role_details"
+          description: Returns requested Roles
+        "404":
+          description: Role does not exist
+      summary: Get registered roles
+      tags:
+        - roles
+    parameters:
+      - $ref: "../parameters/role_id.yaml#/components/parameters/role_id"
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/Role.yaml#/components/schemas/Role"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Role.yaml#/components/schemas/Role_details"
+          description: Returns Role with updated fields
+        "400":
+          description: Invalid payload
+        "404":
+          description: Role does not exist
+      summary: Update Role's fields
+      tags:
+        - roles

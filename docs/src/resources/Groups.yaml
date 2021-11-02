@@ -1,0 +1,78 @@
+paths:
+  /groups:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Group.yaml#/components/schemas/Groups"
+          description: Returns list of Groups
+      summary: Get registered Groups
+      tags:
+        - groups
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/Group.yaml#/components/schemas/Group"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Group.yaml#/components/schemas/Group_details"
+          description: Returns created Group
+        "400":
+          description: Invalid payload
+      summary: Create a new Group
+      tags:
+        - groups
+  /groups/{group_id}:
+    delete:
+      responses:
+        "200":
+          description: Delete a Group
+        "404":
+          description: Group does not exist
+      summary: Delete Group
+      tags:
+        - groups
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Group.yaml#/components/schemas/Group_details"
+          description: Returns requested Group.
+        "404":
+          description: Group does not exist
+      summary: Get registered groups
+      tags:
+        - groups
+    parameters:
+      - $ref: "../parameters/group_id.yaml#/components/parameters/group_id"
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/Group.yaml#/components/schemas/Group"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "../schemas/Group.yaml#/components/schemas/Group_details"
+          description: Return Group with updated fields
+        "400":
+          description: Invalid payload
+        "404":
+          description: Group does not exist
+      summary: Update Group's fields
+      tags:
+        - groups

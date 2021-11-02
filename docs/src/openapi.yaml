@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  description: Swagger spec for documenting Intellium-AI boilerplate API
+  title: Intellium-AI boilerplate API
+  version: 0.0.1
+servers:
+  - url: http://localhost/api
+paths:
+  /groups:
+    $ref: "./resources/Groups.yaml#/paths/~1groups"
+  /groups/{group_id}:
+    $ref: "./resources/Groups.yaml#/paths/~1groups~1{group_id}"
+  /roles:
+    $ref: "./resources/Roles.yaml#/paths/~1roles"
+  /roles/{role_id}:
+    $ref: "./resources/Roles.yaml#/paths/~1roles~1{role_id}"
+  /users:
+    $ref: "./resources/Users.yaml#/paths/~1users"
+  /users/{user_id}:
+    $ref: "./resources/Users.yaml#/paths/~1users~1{user_id}"
+  /users/{user_id}/activate:
+    $ref: "./resources/user_activation.yaml#/paths/~1users~1{user_id}~1activate"
+  /users/{user_id}/deactivate:
+    $ref: "./resources/user_activation.yaml#/paths/~1users~1{user_id}~1deactivate"

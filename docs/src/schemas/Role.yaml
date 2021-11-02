@@ -1,0 +1,36 @@
+components:
+  schemas:
+    Role:
+      properties:
+        description:
+          type: string
+        group:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+    Role_details:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        description:
+          type: string
+        group:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        updated_at:
+          format: date-time
+          type: string
+    Roles:
+      items:
+        $ref: "#/components/schemas/Role_details"
+      type: array
